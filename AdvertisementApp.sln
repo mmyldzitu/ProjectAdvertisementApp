@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisementApp.Common", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisementApp.Entities", "AdvertisementApp.Entities\AdvertisementApp.Entities.csproj", "{A42C4552-0121-4152-A911-2C09C23A910F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisementApp.DataAccess", "AdvertisementApp.DataAccess\AdvertisementApp.DataAccess.csproj", "{AEA24CD5-73C0-44DD-9586-A1E229ED19BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A42C4552-0121-4152-A911-2C09C23A910F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42C4552-0121-4152-A911-2C09C23A910F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42C4552-0121-4152-A911-2C09C23A910F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA24CD5-73C0-44DD-9586-A1E229ED19BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA24CD5-73C0-44DD-9586-A1E229ED19BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA24CD5-73C0-44DD-9586-A1E229ED19BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA24CD5-73C0-44DD-9586-A1E229ED19BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

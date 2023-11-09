@@ -8,7 +8,9 @@ namespace AdvertisementApp.Entities
 {
     public class AppUser:BaseEntity
     {
-        public string AppUserName { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
         public string phoneNumber { get; set; }
         public int GenderID { get; set; }

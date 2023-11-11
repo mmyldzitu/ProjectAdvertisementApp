@@ -32,12 +32,12 @@ namespace AdvertisementApp.DataAccess.Repositories
             return await _advertisementContext.Set<T>().Where(filter).AsNoTracking().ToListAsync();
         }
         //sıralayarak getirme
-        public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T,bool>> selector, OrderByType obtype=OrderByType.DESC )
+        public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T,TKey>> selector, OrderByType obtype=OrderByType.DESC )
         {
             return obtype == OrderByType.ASC ? await _advertisementContext.Set<T>().AsNoTracking().OrderBy(selector).ToListAsync() : await _advertisementContext.Set<T>().OrderByDescending(selector).ToListAsync();
         }
         //Hem filtreleyerek hem sıralayarak getirme
-        public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T,bool>> filter, Expression<Func<T,bool>> selector, OrderByType obtype)
+        public async Task<List<T>> GetAllAsync<TKey>(Expression<Func<T,bool>> filter, Expression<Func<T,TKey>> selector, OrderByType obtype=OrderByType.DESC)
         {
             return obtype == OrderByType.ASC ? await _advertisementContext.Set<T>().Where(filter).AsNoTracking().OrderBy(selector).ToListAsync(): await _advertisementContext.Set<T>().Where(filter).AsNoTracking().OrderByDescending(selector).ToListAsync();
         }

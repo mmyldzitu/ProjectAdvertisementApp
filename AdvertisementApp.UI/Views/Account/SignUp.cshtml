@@ -1,0 +1,57 @@
+﻿@model UserCreateModel
+@{
+    Layout = "_Layout";
+}
+<div class="mt-4">
+    <form method="post" asp-action="SignUp" asp-controller="Account" class="p-4 w-75 mx-aouto">
+
+        <div class="mb-3">
+            <label>Adınız :</label>
+            <input type="text" asp-for="FirstName" class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label>Soyadınız :</label>
+            <input type="text" asp-for="SecondName" class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label>Cinsiyet :</label>
+            <select class="form-select" asp-items="@Model.Genders" asp-for="@Model.GenderID">
+                <option value="0">Bir Cinsiyet Seçin</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Kullanıcı Adınız :</label>
+            <input type="text" asp-for="UserName" class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label>Telefon Numaranız :</label>
+            <input type="text" asp-for="phoneNumber" class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label>Şifreniz :</label>
+            <input type="password" asp-for="Password" class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label>Şifre Tekrarı :</label>
+            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+
+        </div>
+        <div class="mb-3 text-lg-end">
+
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+
+        </div>
+        <div class="text-danger text-lg-start" asp-validation-summary="All">
+
+            
+
+        </div>
+
+
+    </form>
+</div>

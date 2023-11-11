@@ -13,8 +13,8 @@ namespace AdvertisementApp.DataAccess.Interfaces
     {
         Task<List<T>> GetAllAsync();
         Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter);
-        Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, bool>> selector, OrderByType obtype = OrderByType.DESC);
-        Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, bool>> selector, OrderByType obtype);
+        Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, TKey>> selector, OrderByType obtype = OrderByType.DESC);
+        Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> selector, OrderByType obtype);
         Task<T> FindAsync(object id);
         Task<T> FindByFilterAsync(Expression<Func<T, bool>> filter, bool asNoTracking = false);
         IQueryable<T> GetQueryable();

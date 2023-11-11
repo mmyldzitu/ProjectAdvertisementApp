@@ -1,4 +1,7 @@
 using AdvertisementApp.Business.DependencyResolvers.Microsoft;
+using AdvertisementApp.UI.Models;
+using AdvertisementApp.UI.ValidationRules;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +28,7 @@ namespace AdvertisementApp.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencies(Configuration);
+            services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
             services.AddControllersWithViews();
             
         }

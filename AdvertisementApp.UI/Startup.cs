@@ -1,7 +1,11 @@
 using AdvertisementApp.Business.DependencyResolvers.Microsoft;
+using AdvertisementApp.Business.Helpers;
+using AdvertisementApp.UI.Mappings;
 using AdvertisementApp.UI.Models;
 using AdvertisementApp.UI.ValidationRules;
+using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,8 +33,32 @@ namespace AdvertisementApp.UI
         {
             services.AddDependencies(Configuration);
             services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(opt=> {
+        opt.Cookie.Name = "AdvertisementCookie";
+        opt.Cookie.HttpOnly = true;
+        opt.Cookie.SameSite = SameSiteMode.Strict;
+        opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        opt.ExpireTimeSpan = TimeSpan.FromDays(20);
+        opt.LoginPath = new PathString("/Account/SignIn");
+        opt.LogoutPath = new PathString("/Account/LogOut");
+        opt.AccessDeniedPath = new PathString("/Account/AccessDeniedPath");
+    
+    
+    });
             services.AddControllersWithViews();
-            
+            var profiles = ProfileHelper.GetProfiles();
+            profiles.Add(new UserCreateModelProfile());
+
+
+            var configuration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfiles(profiles);
+            });
+            var mapper = configuration.CreateMapper();
+            services.AddSingleton(mapper);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +70,8 @@ namespace AdvertisementApp.UI
             }
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

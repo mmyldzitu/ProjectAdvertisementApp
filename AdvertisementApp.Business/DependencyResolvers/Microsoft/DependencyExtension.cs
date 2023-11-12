@@ -31,15 +31,9 @@ namespace AdvertisementApp.Business.DependencyResolvers.Microsoft
             services.AddDbContext<AdvertisementContext>(opt => {
                 opt.UseSqlServer(configuration.GetConnectionString("Local"));
             });
-            var mapperConfiguration =new MapperConfiguration(opt =>
-            {
-                opt.AddProfile(new ProvidedServiceProfile());
-                opt.AddProfile(new AdvertisementProfile());
-                opt.AddProfile(new AppUserProfile());
-                opt.AddProfile(new GenderProfile());
-            });
-            var mapper = mapperConfiguration.CreateMapper();
-            services.AddSingleton(mapper);
+           
+
+
             services.AddScoped<IUow, Uow>();
             services.AddTransient<IValidator<ProvidedServiceCreateDto>, ProvidedServiceCreateDtoValidator>();
             services.AddTransient<IValidator<ProvidedServiceUpdateDto>, ProvidedServiceUpdateDtoValidator>();
@@ -47,6 +41,8 @@ namespace AdvertisementApp.Business.DependencyResolvers.Microsoft
             services.AddTransient<IValidator<AdvertisementUpdateDto>, AdvertisementUpdateDtoValidator>();
             services.AddTransient<IValidator<AppUserUpdateDto>, AppUserUpdateDtoValidator>();
             services.AddTransient<IValidator<AppUserCreateDto>, AppUserCreateDtoValidator>();
+            services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
+
             services.AddTransient<IValidator<GenderCreateDto>, GenderCreateDtoValidator>();
             services.AddTransient<IValidator<GenderUpdateDto>, GenderUpdateDtoValidator>();
 
@@ -55,5 +51,6 @@ namespace AdvertisementApp.Business.DependencyResolvers.Microsoft
             services.AddScoped<IAppUserService, AppUserService>();
             services.AddScoped<IGenderService, GenderService>();
         }
+        
     }
 }

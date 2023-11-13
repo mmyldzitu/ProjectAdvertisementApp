@@ -1,0 +1,66 @@
+﻿@model AdvertisementAppUserCreateModel
+@{
+    Layout = "_Layout";
+}
+<form class="w-75 mx-auto p-3" method="post" asp-action="Send" asp-controller="Advertisement" enctype="multipart/form-data">
+    <input type="hidden" asp-for="AdvertisementId" />
+    <input type="hidden" asp-for="AppUserId" />
+
+    @if (ViewBag.genderId == (int)GenderType.Erkek)
+    {
+        <div class="mb-3">
+            <label>Askerlik Durumu :</label>
+            <select onchange="setInputDisplay()" asp-for="MilitaryStatusId" asp-items="@ViewBag.militaryStatus" class="form-select"></select>
+        </div>
+        <div id="dateDiv" class="mb-3" style="display:none">
+            <label>Tecil Tarihi:</label>
+            <input type="date" asp-for="EndDate" class="form-control" />
+        </div>
+
+    }
+    else
+    {
+        <input type="hidden" asp-for="MilitaryStatusId" value="@((int)MilitaryStatusType.Muaf)" />
+
+    }
+    <div class="mb-3">
+        <label>iş Deneyiminiz (Yıl Olarak) :</label>
+        <input type="number" asp-for="WorkExperience" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Öz Geçmiş</label>
+        <input type="file" asp-for="CvFile" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Başvur</button>
+    </div>
+    <div asp-validation-summary="All" class="text-danger">
+        
+    </div>
+
+</form>
+
+@section script {
+
+<script>
+
+    function setInputDisplay() {
+        var selectElement = document.getElementById("MilitaryStatusId");
+        var militaryStatusId = selectElement.value;
+        selectedDiv = document.getElementById("dateDiv");
+
+
+        if (militaryStatusId == 2) {
+            selectedDiv.style.display = "block";
+        }
+        else {
+            selectedDiv.style.display = "none";
+
+        }
+    }
+
+</script>
+
+
+}

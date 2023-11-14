@@ -13,7 +13,7 @@ namespace AdvertisementApp.Business.ValidationRules.AdvertisementAppUser
     {
         public AdvertisementAppUserCreateDtoValidator()
         {
-            RuleFor(x => x.AdvertisementAppUserStatusId).NotEmpty();
+            RuleFor(x => x.AdvertisementUserStatusID).NotEmpty();
             RuleFor(x => x.AdvertisementId).NotEmpty();
             RuleFor(x => x.AppUserId).NotEmpty();
             RuleFor(x => x.CvPath).NotEmpty().WithMessage("Lütfen Bir Özgeçmiş Dosyası Yükleyiniz");

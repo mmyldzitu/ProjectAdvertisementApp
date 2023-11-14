@@ -14,6 +14,7 @@ namespace AdvertisementApp.Business.Mappings
         public AdvertisementAppUserProfile()
         {
             CreateMap<AdvertisementAppUser, AdvertisementAppUserCreateDto>().ReverseMap();
+            CreateMap<AdvertisementAppUser, AdvertisementAppUserListDto>().ReverseMap();
         }
     }
 }

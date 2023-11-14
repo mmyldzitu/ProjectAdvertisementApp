@@ -1,11 +1,13 @@
 ﻿using AdvertisementApp.Business.Extensions;
 using AdvertisementApp.Business.Interfaces;
 using AdvertisementApp.Common;
+using AdvertisementApp.Common.Enums;
 using AdvertisementApp.DataAccess.UnitOfWork;
 using AdvertisementApp.Dtos.AdvertisementAppUserDtos;
 using AdvertisementApp.Entities;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,5 +61,15 @@ namespace AdvertisementApp.Business.Services
                 return new Response<AdvertisementAppUserCreateDto>(dto, result.ConvertToCustomValidationError());
             }
         }
+        public async Task<List<AdvertisementAppUserListDto>> GetList(AdvertisementAppUserStatusType type)
+        {
+            var query =  _uow.GetRepository<AdvertisementAppUser>().GetQueryable();
+           var list= await query.Include(x => x.Advertisement).Include(x => x.AdvertisementAppUserStatus).Include(x => x.MilitaryStatus).Include(x => x.AppUser).ThenInclude(x=>x.Gender).Where(x => x.AdvertisementUserStatusID == (int)type).ToListAsync();
+
+            return _mapper.Map<List<AdvertisementAppUserListDto>>(list);
+        }
+
+        
+        
     }
 }

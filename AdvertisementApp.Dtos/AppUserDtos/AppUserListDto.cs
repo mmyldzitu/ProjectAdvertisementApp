@@ -1,4 +1,5 @@
-﻿using AdvertisementApp.Dtos.Interfaces;
+﻿using AdvertisementApp.Dtos.GenderDtos;
+using AdvertisementApp.Dtos.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace AdvertisementApp.Dtos.AppUserDtos
         public string Password { get; set; }
 
         public int GenderID { get; set; }
+        public GenderListDto Gender { get; set; }
 
     }
 }

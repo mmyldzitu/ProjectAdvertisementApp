@@ -8,7 +8,7 @@ namespace AdvertisementApp.Common.Enums
 {
     public enum AdvertisementAppUserStatusType
     {
-        Basuvuru=1,
+        Basvuru=1,
         Mulakat=2,
         Olumsuz=3
 

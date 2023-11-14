@@ -73,7 +73,7 @@ namespace AdvertisementApp.UI.Controllers
                 dto.CvPath = path;
                  
             }
-            dto.AdvertisementAppUserStatusId = model.AdvertisementAppUserStatusId;
+            dto.AdvertisementUserStatusID = model.AdvertisementAppUserStatusId;
             dto.AdvertisementId = model.AdvertisementId;
             dto.AppUserId = model.AppUserId;
             dto.EndDate = model.EndDate;
@@ -86,12 +86,32 @@ namespace AdvertisementApp.UI.Controllers
                 {
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
+                var userID = int.Parse((User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)).Value);
+                var userResponse = await _appUserService.GetByIdAsync<AppUserListDto>(userID);
+                ViewBag.genderId = userResponse.Data.GenderID; var items = Enum.GetValues(typeof(MilitaryStatusType));
+                var list = new List<MilitaryStatusListDto>();
+                foreach (int item in items)
+                {
+                    list.Add(new MilitaryStatusListDto
+                    {
+                        Id = item,
+                        Definition = Enum.GetName(typeof(MilitaryStatusType), item)
+                    });
+
+                }
+                ViewBag.militaryStatus = new SelectList(list, "Id", "Definition");
                 return View(model);
             }
             else
             {
                 return RedirectToAction("HumanResource", "Home");
             }
+        }
+        [Authorize(Roles ="Admin")]
+        public async Task <IActionResult> List()
+        {
+           var list = await _advertisementAppUserService.GetList(AdvertisementAppUserStatusType.Basvuru);
+            return View(list);
         }
 
     }

@@ -1,4 +1,4 @@
-﻿@model List< AdvertisementAppUserListDto>
+﻿@model List<AdvertisementAppUserListDto>
 @{
     Layout = "_Layout";
 }
@@ -8,7 +8,7 @@
         {
             <div class="text-end my-3 p-1">
                 <a asp-action="ApprovedList" asp-controller="Advertisement">Mülakata Çağrılan Başvurular</a> |
-                <a asp-action="RejectedList" asp-controller="Advertisement">Reddedilen Başvurular</a>
+                <a asp-action="List" asp-controller="Advertisement">Yeni Başvurular</a>
             </div>
 
             <table class="mt-3 table table-sm table-hover" table-stripped>
@@ -22,7 +22,7 @@
                         <th>Tecil Bitiş Tarihi</th>
                         <th>İş Deneyimi(Yıllık)</th>
                         <th>Süreç</th>
-                        <th>Ret</th>
+                        
 
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@
                             <td>@(item.EndDate == null? "----" :item.EndDate?.ToString("dddd, dd MMMM yyyy")) </td>
                             <td>@item.WorkExperience </td>
                             <td><a asp-action="SetStatus" asp-controller="Advertisement" asp-route-advertisementAppUserId="@item.Id" asp-route-type=" @((int)@AdvertisementAppUserStatusType.Mulakat)" class="btn btn-outline-success">Mülakata Çağır</a></td>
-                            <td> <a asp-action="SetStatus" asp-controller="Advertisement" asp-route-advertisementAppUserId="@item.Id" asp-route-type=" @((int)@AdvertisementAppUserStatusType.Olumsuz)" class="btn btn-outline-warning">Reddet</a></td>
+                           
 
 
                         </tr>
@@ -54,7 +54,7 @@
         {
             <div class="text-end my-3 p-1">
                 <a asp-action="ApprovedList" asp-controller="Advertisement">Mülakata Çağrılan Başvurular</a> |
-                <a asp-action="RejectedList" asp-controller="Advertisement">Reddedilen Başvurular</a>
+                <a asp-action="List" asp-controller="Advertisement">Yeni Başvurular</a>
             </div>
             <div class="mt-3 text-center lead">
                 Herhangi Bir Başvuru Bulunmamaktadır

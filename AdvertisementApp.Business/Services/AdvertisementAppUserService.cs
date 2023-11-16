@@ -68,6 +68,18 @@ namespace AdvertisementApp.Business.Services
 
             return _mapper.Map<List<AdvertisementAppUserListDto>>(list);
         }
+        public async Task SetStatusAsync(int advertisementAppUserId, AdvertisementAppUserStatusType type)
+        {
+            //var unchanged =  await _uow.GetRepository<AdvertisementAppUser>().FindAsync(advertisementAppUserId);
+            //var changed = await _uow.GetRepository<AdvertisementAppUser>().FindByFilterAsync(x => x.Id == advertisementAppUserId);
+            //changed.AdvertisementUserStatusID = (int)type;
+            //_uow.GetRepository<AdvertisementAppUser>().Update(changed, unchanged);
+            var query =  _uow.GetRepository<AdvertisementAppUser>().GetQueryable();
+            var entity = await query.SingleOrDefaultAsync(x => x.Id == advertisementAppUserId);
+            entity.AdvertisementUserStatusID = (int)type;
+            await _uow.SaveChangesAsync();
+
+        }
 
         
         

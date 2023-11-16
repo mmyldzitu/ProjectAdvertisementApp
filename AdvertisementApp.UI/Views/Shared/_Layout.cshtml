@@ -15,6 +15,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/styles.css" rel="stylesheet" />
 </head>
+@RenderSection("css",false)
 <body id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg @(User.Identity.IsAuthenticated&&User.IsInRole("Admin")?"navbar-dark bg-danger ":"navbar-dark navbar-custom ")">
@@ -25,26 +26,22 @@
                 <ul class="navbar-nav ms-auto">
                     @if (User.Identity.IsAuthenticated)
                     {
-        <li class="nav-item"><a class="nav-link" asp-action="LogOut" asp-controller="Account">Çıkış Yap</a></li>
-                        @if (User.IsInRole("Member"))
-                        {
-        
+                <li class="nav-item"><a class="nav-link" asp-action="LogOut" asp-controller="Account">Çıkış Yap</a></li>
+                                @if (User.IsInRole("Member"))
+                                {
 
-                            <li class="nav-item"><a class="nav-link" asp-action="HumanResource" asp-controller="Home">İnsan Kaynakları</a></li>
-                         }
-                        @if (User.IsInRole("Admin"))
-                        {
 
-        <li class="nav-item"><a class="nav-link" asp-action="List" asp-controller="Advertisement">İş İlanları</a></li> 
-                        }
-                        
-                     }
-                       else
-                         {
-                        <li class="nav-item"><a class="nav-link" asp-action="SignUp" asp-controller="Account">Kayıt Ol</a></li>
-                                        <li class="nav-item"><a class="nav-link" asp-action="SignIn" asp-controller="Account">Giriş Yap</a></li>
-                                                        <li class="nav-item"><a class="nav-link" asp-action="HumanResource" asp-controller="Home">İnsan Kaynakları</a></li>
-                          }
+                <li class="nav-item"><a class="nav-link" asp-action="HumanResource" asp-controller="Home">İnsan Kaynakları</a></li>}
+                                                @if (User.IsInRole("Admin"))
+                                                {
+
+                                <li class="nav-item"><a class="nav-link" asp-action="List" asp-controller="Application">İş İlanları</a></li>
+                                                    <li class="nav-item"><a class="nav-link" asp-action="HumanResource" asp-controller="Home">Yayındaki İlanlar</a></li>} }
+                                                            else
+                                                            {
+                                                <li class="nav-item"><a class="nav-link" asp-action="SignUp" asp-controller="Account">Kayıt Ol</a></li>
+                                                                <li class="nav-item"><a class="nav-link" asp-action="SignIn" asp-controller="Account">Giriş Yap</a></li>
+                                                                                <li class="nav-item"><a class="nav-link" asp-action="HumanResource" asp-controller="Home">İnsan Kaynakları</a></li>}
 
 
                 </ul>

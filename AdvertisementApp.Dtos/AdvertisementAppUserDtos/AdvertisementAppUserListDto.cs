@@ -12,6 +12,7 @@ namespace AdvertisementApp.Dtos.AdvertisementAppUserDtos
 {
     public class AdvertisementAppUserListDto
     {
+        public int Id { get; set; }
         public int AdvertisementID { get; set; }
         public AdvertisementListDto Advertisement { get; set; }
 
